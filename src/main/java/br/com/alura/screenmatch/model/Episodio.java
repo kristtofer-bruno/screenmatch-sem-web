@@ -61,7 +61,7 @@ public class Episodio {
         this.avaliacao = avaliacao;
     }
 
-    public LocalDate getDataLLancamento() {
+    public LocalDate getDataLancamento() {
         return dataLancamento;
     }
 
