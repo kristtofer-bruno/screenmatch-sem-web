@@ -22,37 +22,45 @@ public class Principal {
     private ConverteDados conversor = new ConverteDados();
     private final String ENDERECO = "https://www.omdbapi.com/?t=";
     private final String API_KEY = "&apikey=1d4a89c5";
-
+    private List<DadosSerie> dadosSeries = new ArrayList<>();
 
     public void exibeMenu(){
-        var menu = """
-                1 - Buscar séries
-                2 - Buscar episódios
-                
-                0 - Sair                                 
-                """;
+        var opcao = -1;
+        while(opcao != 0) {
+            var menu = """
+                    1 - Buscar séries
+                    2 - Buscar episódios
+                    3 - Listar séries buscadas
+                    
+                    0 - Sair                                 
+                    """;
 
-        System.out.println(menu);
-        var opcao = sc.nextInt();
-        sc.nextLine();
+            System.out.println(menu);
 
-        switch (opcao) {
-            case 1:
-                buscarSerieWeb();
-                break;
-            case 2:
-                buscarEpisodioPorSerie();
-                break;
-            case 0:
-                System.out.println("Saindo...");
-                break;
-            default:
-                System.out.println("Opção inválida");
+            opcao = sc.nextInt();
+            sc.nextLine();
+            switch (opcao) {
+                case 1:
+                    buscarSerieWeb();
+                    break;
+                case 2:
+                    buscarEpisodioPorSerie();
+                    break;
+                case 3:
+                    listarSeriesBuscadas();
+                    break;
+                case 0:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida");
+            }
         }
     }
 
     private void buscarSerieWeb() {
         DadosSerie dados = getDadosSerie();
+        dadosSeries.add(dados);
         System.out.println(dados);
     }
 
@@ -74,7 +82,15 @@ public class Principal {
             temporadas.add(dadosTemporada);
         }
         temporadas.forEach(System.out::println);
+    }
 
+    private void listarSeriesBuscadas() {
+        dadosSeries.forEach(System.out::println);
+    }
+
+
+
+// BLOCO DE CÓDIGO FEITO ANTES PARA TESTE
 //        var nomeSerie = sc.nextLine();
 //
 //        var json = consumo.obterDados(ENDERECO + nomeSerie.replace(" ", "+") + API_KEY);
@@ -187,5 +203,4 @@ public class Principal {
 //        System.out.println("Melhor episódio: " + est.getMax());
 //        System.out.println("Pior episódio: " + est.getMin());
 //        System.out.println("Quantidade: " + est.getCount());
-    }
 }
