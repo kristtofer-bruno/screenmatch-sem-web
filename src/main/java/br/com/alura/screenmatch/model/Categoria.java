@@ -1,6 +1,6 @@
 package br.com.alura.screenmatch.model;
 
-import java.security.PrivateKey;
+
 
 public enum Categoria {
 
@@ -11,7 +11,9 @@ public enum Categoria {
     CRIME("Crime");
 
     private String categoriaOmdb;
-    Categoria(String categoriaOmdb) {}
+    Categoria(String categoriaOmdb) {
+        this.categoriaOmdb = categoriaOmdb;
+    }
 
     public static Categoria fromString(String text) {
         for (Categoria categoria : Categoria.values()) {
